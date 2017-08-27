@@ -46,5 +46,21 @@ def check_answer(guess, answer):
     return (correct, regular)
 
 def delete_guesses(guesses, guess, correct, regular):
+    """Removes imposible guesses given the player's last guess response.
+
+    Added a function which has the correct and regular elements response from
+    the player's current guess, and remove from the list of guesses any guess
+    that would not give that response, if the last player's guess were the
+    answer.
+
+    Args:
+        guesses (list): List of all current possible guesses.
+        guess (list): Last player guess.
+        correct (int): Number of correct elements from the player's last guess.
+        regular (int): Number of regular elements from the player's last guess.
+
+    Returns:
+        list: An updated guesses list with all impossible guesses removed.
+    """
     return [x for x in guesses if \
             check_answer(x, guess) != (correct, regular)]
