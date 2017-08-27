@@ -1,7 +1,13 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
 """Mastermind game
 
 This module is responsible for being a Mastermind game solver.
 """
+
+class WrongSizeList(Exception):
+    """Raised when the guess or answer list has a size different than 4"""
+    pass
 
 def check_answer(guess, answer):
     """Calculates correct and answer elements from the player guess.
@@ -39,6 +45,6 @@ def check_answer(guess, answer):
 
     return (correct, regular)
 
-class WrongSizeList(Exception):
-    """Raised when the guess or answer list has a size different than 4"""
-    pass
+def delete_guesses(guesses, answer, correct, regular):
+    return [guess for guess in guesses if \
+            check_answer(guess  , answer) != (correct, regular)]
