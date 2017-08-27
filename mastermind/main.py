@@ -1,6 +1,9 @@
+"""Mastermind game
+
+This module is responsible for being a Mastermind game solver.
+"""
 
 def check_answer(guess, answer):
-
     """Calculates correct and answer elements from the player guess.
 
     For every element in the guess, checks if it has the same value as the
@@ -9,12 +12,12 @@ def check_answer(guess, answer):
     answer. If it is, adds 1 to the regular elements count.
 
     Args:
-        guess: The player guess in that round.
-        answer: The final answer to the game.
+        guess (list): The player guess in that round.
+        answer (list): The final answer to the game.
 
     Returns:
-        A tuple containing the number of correct and the number of regular
-        elements in the player guess.
+        tuple: A tuple containing the number of correct and the number of
+        regular elements in the player guess.
 
     Raises:
         WrongSizeList: An error occurred when the guess or answer list has a
@@ -35,7 +38,6 @@ def check_answer(guess, answer):
             regular += 1
 
     return (correct, regular)
-
 
 class WrongSizeList(Exception):
     """Raised when the guess or answer list has a size different than 4"""
