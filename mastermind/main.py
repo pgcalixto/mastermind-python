@@ -45,6 +45,6 @@ def check_answer(guess, answer):
 
     return (correct, regular)
 
-def delete_guesses(guesses, answer, correct, regular):
-    return [guess for guess in guesses if \
-            check_answer(guess  , answer) != (correct, regular)]
+def delete_guesses(guesses, guess, correct, regular):
+    return [x for x in guesses if \
+            check_answer(x, guess) != (correct, regular)]
