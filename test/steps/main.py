@@ -12,7 +12,7 @@ def step_impl(context):
 def step_impl(context):
     context.element_count = main.check_answer(context.guess, context.answer)
 
-@then('we have the correct and regular count')
+@then('we have the correct element count')
 def step_impl(context):
     assert context.element_count == (0, 3)
 

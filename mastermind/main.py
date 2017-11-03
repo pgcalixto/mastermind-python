@@ -18,21 +18,21 @@ def check_answer(guess, answer):
         answer (list): The final answer to the game.
 
     Returns:
-        tuple: A tuple containing the number of correct and the number of
-        regular elements in the player guess.
+        tuple: A tuple containing the number of good and the number of regular
+        elements in the player guess.
     """
-    correct = 0
+    good = 0
     regular = 0
 
     for element in enumerate(guess):
         index = element[0]
         value = element[1]
         if value == answer[index]:
-            correct += 1
+            good += 1
         elif value in answer:
             regular += 1
 
-    return (correct, regular)
+    return (good, regular)
 
 def delete_guesses(guesses, guess, correct, regular):
     """Removes imposible guesses given the player's last guess response.
