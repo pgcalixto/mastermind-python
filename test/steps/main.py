@@ -20,15 +20,6 @@ def step_impl(context):
 def step_impl(context):
     assert context.element_count == (0, 3)
 
-@given('we have a player guess with an incorrect size')
-def step_impl(context):
-    context.guess = [5, 3, 2]
-    context.answer = [1, 2, 3, 4]
-
-@then('it throws a WrongSizeList exception')
-def step_impl(context):
-    assert isinstance(context.exception, main.WrongSizeList)
-
 @given('I have a player guess which is not the code')
 def step_impl(context):
     context.all_guesses = [list(p) for p in permutations(range(1, 7), 4)]
