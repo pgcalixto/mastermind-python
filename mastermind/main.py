@@ -5,10 +5,6 @@
 This module is responsible for being a Mastermind game solver.
 """
 
-class WrongSizeList(Exception):
-    """Raised when the guess or answer list has a size different than 4"""
-    pass
-
 def check_answer(guess, answer):
     """Calculates correct and answer elements from the player guess.
 
@@ -24,16 +20,9 @@ def check_answer(guess, answer):
     Returns:
         tuple: A tuple containing the number of correct and the number of
         regular elements in the player guess.
-
-    Raises:
-        WrongSizeList: An error occurred when the guess or answer list has a
-        size different than 4.
     """
     correct = 0
     regular = 0
-
-    if len(guess) != 4 or len(answer) != 4:
-        raise WrongSizeList("Guess/answer has size different than 4.")
 
     for element in enumerate(guess):
         index = element[0]
