@@ -24,13 +24,17 @@ def check_answer(guess, answer):
     good = 0
     regular = 0
 
-    for element in enumerate(guess):
-        index = element[0]
-        value = element[1]
-        if value == answer[index]:
+    flag = [False] * 4
+
+    for i in range(4):
+        if guess[i] == answer[i]:
             good += 1
-        elif value in answer:
-            regular += 1
+            flag[i] = True
+        else:
+            for j in range(4):
+                if j != i and guess[i] == answer[j] and not flag[j]:
+                    regular += 1
+                    flag[j] = True
 
     return (good, regular)
 
