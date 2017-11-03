@@ -10,11 +10,7 @@ def step_impl(context):
 
 @when('we test it against the answer')
 def step_impl(context):
-    try:
-        context.element_count = main.check_answer(context.guess, context.answer)
-        context.exception = None
-    except Exception as e:
-        context.exception = e
+    context.element_count = main.check_answer(context.guess, context.answer)
 
 @then('we have the correct and regular count')
 def step_impl(context):
