@@ -1,7 +1,7 @@
 
+from itertools import permutations
 from behave import given, when, then
 from mastermind import main
-from itertools import permutations
 
 @given('we have a guess and an answer, both without repeated numbers')
 def step_impl(context):
