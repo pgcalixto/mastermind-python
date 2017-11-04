@@ -1,9 +1,13 @@
 Feature: testing the main application
 
   Scenario: test player guess checking
-     Given we have a player guess and a game answer
+     Given we have a guess and an answer, both without repeated numbers
       when we test it against the answer
-      then we have the correct and regular count
+      then we have the correct element count for both lists without repeated numbers
+
+      Given we have a guess with repeated numbers and a game answer without repeated numbers
+       when we test it against the answer
+       then we have the correct element count for a guess with repeated numbers
 
   Scenario: removing guesses from the set
      Given I have a player guess which is not the code
