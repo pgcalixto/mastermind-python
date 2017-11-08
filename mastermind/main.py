@@ -24,17 +24,20 @@ def check_answer(guess, answer):
     good = 0
     regular = 0
 
-    flag = [False] * 4
-
     for i in range(4):
+        # if guess[i] equals answer[i], increments the good elements count
         if guess[i] == answer[i]:
             good += 1
-            flag[i] = True
+        # otherwise, increments the regular counts by the number of times
+        # guess[i] is present in the answer
         else:
             for j in range(4):
-                if j != i and guess[i] == answer[j] and not flag[j]:
+                if guess[i] == answer[j]:
                     regular += 1
-                    flag[j] = True
+
+    # finally, decrements the times the regular elements were incorrectly
+    # counted in positions where the element was good
+    regular -= good
 
     return (good, regular)
 
