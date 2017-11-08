@@ -5,8 +5,8 @@ from mastermind import main
 
 @given('we have a guess and an answer, both without repeated numbers')
 def step_impl(context):
-    context.guess = [5, 3, 2, 1]
-    context.answer = [1, 2, 3, 4]
+    context.guess = '5321'
+    context.answer = '1234'
 
 @when('we test it against the answer')
 def step_impl(context):
