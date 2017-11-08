@@ -25,6 +25,15 @@ def step_impl(context):
 def step_impl(context):
     assert context.element_count == (1, 2)
 
+@given('we have a guess and an answer, both with repeated numbers')
+def step_impl(context):
+    context.guess = '1121'
+    context.answer = '1241'
+
+@then('we have the correct element count for bot list with repeated numbers')
+def step_impl(context):
+    assert context.element_count == (2, 1)
+
 @given('I have a player guess which is not the code')
 def step_impl(context):
     context.all_guesses = [list(p) for p in permutations(range(1, 7), 4)]

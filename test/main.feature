@@ -9,6 +9,10 @@ Feature: testing the main application
        when we test it against the answer
        then we have the correct element count for a guess with repeated numbers
 
+       Given we have a guess and an answer, both with repeated numbers
+        when we test it against the answer
+        then we have the correct element count for bot list with repeated numbers
+
   Scenario: removing guesses from the set
      Given I have a player guess which is not the code
       when I get the response for the number of correct and regular elements
