@@ -14,8 +14,8 @@ def check_answer(guess, answer):
     answer. If it is, adds 1 to the regular elements count.
 
     Args:
-        guess (list): The player guess in that round.
-        answer (list): The game answer / game code.
+        guess (str): The player guess in that round.
+        answer (str): The game answer / game code.
 
     Returns:
         tuple: A tuple containing the number of good and the number of regular
