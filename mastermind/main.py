@@ -15,7 +15,7 @@ def check_answer(guess, answer):
 
     Args:
         guess (list): The player guess in that round.
-        answer (list): The final answer to the game.
+        answer (list): The game answer / game code.
 
     Returns:
         tuple: A tuple containing the number of good and the number of regular
