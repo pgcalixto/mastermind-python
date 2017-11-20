@@ -5,7 +5,7 @@
 This module is responsible for being a Mastermind game solver.
 """
 
-def check_answer(code, guess):
+def check_answer(guess, code):
     """Calculates good and regular elements from the player guess.
 
     For every element in the guess, checks if it has the same value as the
@@ -14,8 +14,8 @@ def check_answer(code, guess):
     code. If it is, adds 1 to the regular elements count.
 
     Args:
-        code (str): The game code.
         guess (str): The player guess in that round.
+        code (str): The game code.
 
     Returns:
         tuple: A tuple containing the number of good and the number of regular
