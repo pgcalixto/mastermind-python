@@ -35,21 +35,19 @@ def check_answer(code, guess):
 
     return (good, regular)
 
-def delete_guesses(guesses, guess, answer):
-    """Removes imposible guesses given the player's last guess answer.
+def get_possible_guesses(guesses, guess, answer):
+    """Retrieves possible guesses given a game code an answer.
 
-    Added a function which has the good and regular elements answer from the
-    player's current guess, and remove from the list of guesses any guess that
-    would not give that answer, if the last player's guess were the code.
+    Given the good and regular elements answer and the game code, retrieves all
+    the guesses that would match that answer for this code.
 
     Args:
-        guesses (list): List of all current possible guesses.
-        guess (list): Last player guess.
-        good (int): Number of good elements from the player's last guess.
-        regular (int): Number of regular elements from the player's last guess.
+        guesses (list): List of all guesses to be chosen from.
+        code (string): Game code.
+        answer (int, int): Number of good and regular elements when the guess is
+                           played against the code.
 
     Returns:
-        list: An updated guesses list with all impossible guesses removed.
+        list: A list with all possible guesses.
     """
-    return [x for x in guesses if \
-            check_answer(x, guess) != answer]
+    return [x for x in guesses if check_answer(x, guess) != answer]
