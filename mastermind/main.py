@@ -35,7 +35,7 @@ def check_answer(code, guess):
 
     return (good, regular)
 
-def delete_guesses(guesses, guess, good, regular):
+def delete_guesses(guesses, guess, answer):
     """Removes imposible guesses given the player's last guess answer.
 
     Added a function which has the good and regular elements answer from the
@@ -52,4 +52,4 @@ def delete_guesses(guesses, guess, good, regular):
         list: An updated guesses list with all impossible guesses removed.
     """
     return [x for x in guesses if \
-            check_answer(x, guess) != (good, regular)]
+            check_answer(x, guess) != answer]
