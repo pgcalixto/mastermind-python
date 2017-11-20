@@ -2,17 +2,20 @@ from itertools import product
 from behave import given, when, then
 from mastermind import main
 
-@given('I have a player guess which is not the code')
+@given('I have an answer for a player guess')
 def step_impl(context):
-    context.guesses = [''.join(x) for x in product('123456', repeat=4)]
+    code = '2222'
     context.guess = '1111'
-    context.code = '2222'
+    context.answer = main.check_answer(code, context.guess)
 
-@when('I get the response for the number of correct and regular elements')
+@when('I get the list of possible codes for this guess and the answer')
 def step_impl(context):
-    context.answer = main.check_answer(context.guess, context.code)
 
-@then('I have a set with the elements that would not give this response removed')
+    guesses = [''.join(x) for x in product('123456', repeat=4)]
+    context.retrieved = main.get_possible_guesses(guesses, context.guess,
+                                                  context.answer)
+
+@then('I have the expected list of possible codes')
 def step_impl(context):
 
     expected = ['1111', '1112', '1113', '1114', '1115', '1116', '1121', '1122',
@@ -100,6 +103,4 @@ def step_impl(context):
                 '6531', '6541', '6551', '6561', '6611', '6612', '6613', '6614',
                 '6615', '6616', '6621', '6631', '6641', '6651', '6661']
 
-    retrieved = main.get_possible_guesses(context.guesses, context.guess,
-                                          context.answer)
-    assert retrieved == expected
+    assert context.retrieved == expected
