@@ -36,18 +36,18 @@ def check_answer(code, guess):
     return (good, regular)
 
 def get_possible_guesses(guesses, guess, answer):
-    """Retrieves possible guesses given a game code an answer.
+    """Retrieves possible codes given a game guess and its answer.
 
-    Given the good and regular elements answer and the game code, retrieves all
-    the guesses that would match that answer for this code.
+    Given a game guess and its good and regular elements answer, retrieves all
+    the codes that would match this answer for that guess.
 
     Args:
         guesses (list): List of all guesses to be chosen from.
-        code (string): Game code.
+        guess (str): Player guess.
         answer (int, int): Number of good and regular elements when the guess is
                            played against the code.
 
     Returns:
         list: A list with all possible guesses.
     """
-    return [x for x in guesses if check_answer(x, guess) != answer]
+    return [code for code in guesses if check_answer(code, guess) != answer]
