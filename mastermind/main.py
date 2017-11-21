@@ -51,3 +51,63 @@ def get_possible_guesses(guesses, guess, answer):
         list: A list with all possible guesses.
     """
     return [code for code in guesses if check_answer(code, guess) != answer]
+
+def get_best_guess(unused_guesses, possible_guesses):
+    """Returns best guess using Knuth's minimax algorithm.
+
+    Apply minimax technique to find a next guess as follows:
+
+    Being S the list of the possible guesses, the best guess will be the guess
+    that can match the most codes for one good and regular combination.
+
+    For each guess G of S and all answer A of all possible answer, there is a C
+    number of possible codes. The score of the guess G is the maximum C number
+    of possible codes that G can have.
+
+    The best guess will be the guess G with the minimum score.
+
+    Args:
+        possible_guesses (list): Current possible guesses.
+
+    Returns:
+        str: The best guess to play next.
+    """
+
+    n_guesses = len(possible_guesses)
+    best_guesses = [possible_guesses[0]]
+    best_score = 0
+
+    for guess in unused_guesses:
+
+        code_matches = {}
+        for code in possible_guesses:
+
+            answer = check_answer(code, guess)
+            if answer not in code_matches:
+                code_matches[answer] = 1
+            else:
+                code_matches[answer] += 1
+
+        # the guess score is the maximum number of code matches it can have
+        # guess_score = max([x for x in code_matches.values()])
+        guess_score = min([n_guesses - x for x in code_matches.values()])
+
+        # if the current guess score equals to the best score, includes the
+        # current guess to the best guesses list
+        if guess_score == best_score:
+            best_guesses.append(guess)
+        # otherwise, if the current guess score is greater than the best
+        # score, updates the best score and the best guesses list
+        elif guess_score > best_score:
+            best_score = guess_score
+            best_guesses = [guess]
+
+    # TODO use list comprehensions to match only the first possible item instead
+    # of all the possible items
+    possible_best_guesses = [guess for guess in best_guesses if \
+                             guess in possible_guesses]
+
+    if len(possible_best_guesses) > 0:
+        return possible_best_guesses[0]
+
+    return best_guesses[0]
