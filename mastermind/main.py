@@ -18,8 +18,8 @@ def check_answer(code, guess):
         guess (str): The player guess in that round.
 
     Returns:
-        tuple: A tuple containing the number of good and the number of regular
-        elements in the player guess.
+        int, int: A tuple containing the number of good and regular elements in
+                  the player guess.
     """
     good = 0
     regular = 0
