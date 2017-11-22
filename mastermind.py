@@ -8,7 +8,7 @@ from itertools import product
 class Player:
     """Mastermind game player.
 
-    This module is responsible for being a Mastermind game solver and generating
+    This class is responsible for being a Mastermind game solver and generating
     the guesses to be played in a game.
     """
 
