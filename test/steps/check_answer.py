@@ -1,6 +1,6 @@
 from ast import literal_eval
 from behave import given, when, then
-from mastermind import Player
+from mastermind import main
 
 @given('we have a guess and a code, both without repeated numbers')
 def step_impl(context):
@@ -9,8 +9,9 @@ def step_impl(context):
 
 @when('we test it against the answer')
 def step_impl(context):
-    context.element_count = Player._Player__check_answer(
-        context.code, context.guess)
+    context.element_count = main.check_answer(context.code, context.guess)
+    print('code:', context.code, ', guess:', context.guess, ', count:',
+          context.element_count)
 
 @then('we have the correct element count for both lists without repeated numbers')
 def step_impl(context):
