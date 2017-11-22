@@ -5,6 +5,10 @@
 This module is responsible for being a Mastermind game solver.
 """
 
+from itertools import product
+
+ALL_GUESSES = tuple(''.join(x) for x in product('123456', repeat=4))
+
 def check_answer(code, guess):
     """Calculates good and regular elements from the player guess.
 
@@ -112,3 +116,36 @@ def get_next_guess(unused_guesses, possible_guesses):
                        guess in possible_guesses),
                       best_guesses[0])
     return best_guess
+
+def main():
+    '''Main function.'''
+
+    unused_guesses = list(ALL_GUESSES)
+    possible_guesses = list(ALL_GUESSES)
+
+    # first guess
+    guess = '1122'
+    print(guess)
+
+    answer = input()
+    while answer != '40' and possible_guesses:
+
+        # parses the answer
+        answer = (int(answer[0]), int(answer[1]))
+
+        # remove last guess from unused guesses
+        unused_guesses.remove(guess)
+
+        # remove impossible guesses given last guess and its answer
+        possible_guesses = get_possible_guesses(possible_guesses, guess, answer)
+
+        # calculates best next guess
+        guess = get_next_guess(unused_guesses, possible_guesses)
+        print(guess)
+
+        answer = input()
+
+    print('ganhei')
+
+if __name__ == '__main__':
+    main()
