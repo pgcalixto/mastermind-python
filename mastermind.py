@@ -2,21 +2,21 @@
 # -*- coding: utf-8 -*-
 """Mastermind game player."""
 
-from itertools import product as __gen_guess
+from itertools import product
 
 
 class Player:
     """Mastermind game player.
 
-    This module is responsible for being a Mastermind game solver and generating
+    This class is responsible for being a Mastermind game solver and generating
     the guesses to be played in a game.
     """
 
     def __init__(self):
         self.__unused_guesses = list(
-            ''.join(x) for x in __gen_guess('123456', repeat=4))
+            ''.join(x) for x in product('123456', repeat=4))
         self.__possible_guesses = list(
-            ''.join(x) for x in __gen_guess('123456', repeat=4))
+            ''.join(x) for x in product('123456', repeat=4))
         self.__last_guess = '1122'
 
     @staticmethod
@@ -149,13 +149,18 @@ class Player:
                                player guess.
         Returns:
             str: The best guess to play next.
+                 None if there is not guess left to play.
         """
-        # remove last guess from unused guesses
-        self.__unused_guesses.remove(self.__last_guess)
-
         # remove impossible guesses given last guess and its answer
         self.__possible_guesses = self.__get_possible_guesses(
             self.__possible_guesses, self.__last_guess, answer)
+
+        # if there is no possible guess left, there is an error
+        if not self.__possible_guesses:
+            return None
+
+        # remove last guess from unused guesses
+        self.__unused_guesses.remove(self.__last_guess)
 
         # calculates best next guess and returns it
         self.__last_guess = self.__minimax_guess(self.__unused_guesses,
