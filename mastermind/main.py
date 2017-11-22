@@ -18,8 +18,8 @@ def check_answer(code, guess):
         guess (str): The player guess in that round.
 
     Returns:
-        tuple: A tuple containing the number of good and the number of regular
-        elements in the player guess.
+        int, int: A tuple containing the number of good and regular elements in
+                  the player guess.
     """
     good = 0
     regular = 0
@@ -51,3 +51,64 @@ def get_possible_guesses(guesses, guess, answer):
         list: A list with all possible guesses.
     """
     return [code for code in guesses if check_answer(code, guess) == answer]
+
+def get_next_guess(unused_guesses, possible_guesses):
+    """Returns best guess using Knuth's minimax algorithm.
+
+    Apply minimax technique to find a next guess as follows:
+
+    * S is the list of possible guesses
+    * U is the list of unused guesses (from all the 1296, not only those in S)
+    * A is the list of all possible answers of good and regular elements
+
+    For each pair of guess in U and answer in A, there is a hit count for codes
+    in S that would match these guess and answer.
+    * the score of a guess-answer pair is the length of S minus the hit count
+    for this pair
+    * the score of a guess in U is the mininum score of pairs of this guess and
+    all answers in A
+
+    From the set of the guesses with maximum score, select the first one,
+    choosing a guess that is present in S, if applicable.
+
+    Args:
+        possible_guesses (list): Current possible guesses.
+
+    Returns:
+        str: The best guess to play next.
+    """
+
+    n_guesses = len(possible_guesses)
+    best_guesses = []
+    best_score = 0
+
+    for guess in unused_guesses:
+
+        code_matches = {}
+        for code in possible_guesses:
+
+            answer = check_answer(code, guess)
+            if answer not in code_matches:
+                code_matches[answer] = 1
+            else:
+                code_matches[answer] += 1
+
+        # the guess score is the maximum number of code matches it can have
+        guess_score = min([n_guesses - x for x in code_matches.values()])
+
+        # if the current guess score equals to the best score, includes the
+        # current guess to the best guesses list
+        if guess_score == best_score:
+            best_guesses.append(guess)
+        # otherwise, if the current guess score is greater than the best
+        # score, updates the best score and the best guesses list
+        elif guess_score > best_score:
+            best_score = guess_score
+            best_guesses = [guess]
+
+    # uses as next guess an element of S, if possible. otherwise, select the
+    # first element of the best guesses list
+    best_guess = next((guess for guess in best_guesses if
+                       guess in possible_guesses),
+                      best_guesses[0])
+    return best_guess
