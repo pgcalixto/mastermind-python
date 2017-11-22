@@ -149,13 +149,18 @@ class Player:
                                player guess.
         Returns:
             str: The best guess to play next.
+                 None if there is not guess left to play.
         """
-        # remove last guess from unused guesses
-        self.__unused_guesses.remove(self.__last_guess)
-
         # remove impossible guesses given last guess and its answer
         self.__possible_guesses = self.__get_possible_guesses(
             self.__possible_guesses, self.__last_guess, answer)
+
+        # if there is no possible guess left, there is an error
+        if not self.__possible_guesses:
+            return None
+
+        # remove last guess from unused guesses
+        self.__unused_guesses.remove(self.__last_guess)
 
         # calculates best next guess and returns it
         self.__last_guess = self.__minimax_guess(self.__unused_guesses,

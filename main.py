@@ -21,6 +21,13 @@ def main():
         # parses the answer and gets the next guess
         answer = (int(answer[0]), int(answer[1]))
         guess = game_player.get_next_guess(answer)
+
+        # if there is no guess left, print error and exit
+        if not guess:
+            print('erro')
+            return
+
+        # otherwise, play the error and get the answer
         print(guess)
         answer = input()
 
