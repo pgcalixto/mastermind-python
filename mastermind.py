@@ -98,23 +98,25 @@ class Player:
         Returns:
             str: The best next guess calculated by Knuth's minimax.
         """
-        n_guesses = len(possible_guesses)
         best_guesses = []
         best_score = 0
+        n_guesses = len(possible_guesses)
 
         for guess in unused_guesses:
-
-            code_matches = {}
+            answer_count = {}
             for code in possible_guesses:
-
+                # for each guess in U and code in S, calculates the answer and
+                # stores it in the answer count
                 answer = cls.__check_answer(code, guess)
-                if answer not in code_matches:
-                    code_matches[answer] = 1
+                if answer not in answer_count:
+                    answer_count[answer] = 1
                 else:
-                    code_matches[answer] += 1
+                    answer_count[answer] += 1
 
-            # the guess score is the maximum number of code matches it can have
-            guess_score = min([n_guesses - x for x in code_matches.values()])
+            # the guess score is the maximum number of code matches it has for
+            # a single answer, i.e., the minimum number of possibilities it
+            # might eliminate from S
+            guess_score = min([n_guesses - x for x in answer_count.values()])
 
             # if the current guess score equals to the best score, includes the
             # current guess to the best guesses list
