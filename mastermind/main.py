@@ -52,7 +52,7 @@ def get_possible_guesses(guesses, guess, answer):
     """
     return [code for code in guesses if check_answer(code, guess) == answer]
 
-def get_best_guess(unused_guesses, possible_guesses):
+def get_next_guess(unused_guesses, possible_guesses):
     """Returns best guess using Knuth's minimax algorithm.
 
     Apply minimax technique to find a next guess as follows:
