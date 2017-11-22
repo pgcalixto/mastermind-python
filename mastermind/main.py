@@ -57,14 +57,19 @@ def get_best_guess(unused_guesses, possible_guesses):
 
     Apply minimax technique to find a next guess as follows:
 
-    Being S the list of the possible guesses, the best guess will be the guess
-    that can match the most codes for one good and regular combination.
+    * S is the list of possible guesses
+    * U is the list of unused guesses (from all the 1296, not only those in S)
+    * A is the list of all possible answers of good and regular elements
 
-    For each guess G of S and all answer A of all possible answer, there is a C
-    number of possible codes. The score of the guess G is the maximum C number
-    of possible codes that G can have.
+    For each pair of guess in U and answer in A, there is a hit count for codes
+    in S that would match these guess and answer.
+    * the score of a guess-answer pair is the length of S minus the hit count
+    for this pair
+    * the score of a guess in U is the mininum score of pairs of this guess and
+    all answers in A
 
-    The best guess will be the guess G with the minimum score.
+    From the set of the guesses with maximum score, select the first one,
+    choosing a guess that is present in S, if applicable.
 
     Args:
         possible_guesses (list): Current possible guesses.
