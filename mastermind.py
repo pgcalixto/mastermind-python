@@ -1,16 +1,16 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-'''Mastermind game player.'''
+"""Mastermind game player."""
 
 from itertools import product as __gen_guess
 
 
 class Player:
-    '''Mastermind game player.
+    """Mastermind game player.
 
     This module is responsible for being a Mastermind game solver and generating
     the guesses to be played in a game.
-    '''
+    """
 
     def __init__(self):
         self.__unused_guesses = list(
@@ -50,7 +50,8 @@ class Player:
 
         return (good, regular)
 
-    def __get_possible_guesses(self, guesses, guess, answer):
+    @classmethod
+    def __get_possible_guesses(cls, guesses, guess, answer):
         """Retrieves possible codes given a game guess and its answer.
 
         Given a game guess and its good and regular elements answer, retrieves
@@ -67,10 +68,11 @@ class Player:
         """
         return [
             code for code in guesses
-            if self.__check_answer(code, guess) == answer
+            if cls.__check_answer(code, guess) == answer
         ]
 
-    def __minimax_guess(self, unused_guesses, possible_guesses):
+    @classmethod
+    def __minimax_guess(cls, unused_guesses, possible_guesses):
         """Returns best guess using Knuth's minimax algorithm.
 
         Apply minimax technique to find a next guess as follows:
@@ -96,7 +98,6 @@ class Player:
         Returns:
             str: The best next guess calculated by Knuth's minimax.
         """
-
         n_guesses = len(possible_guesses)
         best_guesses = []
         best_score = 0
@@ -106,7 +107,7 @@ class Player:
             code_matches = {}
             for code in possible_guesses:
 
-                answer = self.__check_answer(code, guess)
+                answer = cls.__check_answer(code, guess)
                 if answer not in code_matches:
                     code_matches[answer] = 1
                 else:
@@ -149,7 +150,6 @@ class Player:
         Returns:
             str: The best guess to play next.
         """
-
         # remove last guess from unused guesses
         self.__unused_guesses.remove(self.__last_guess)
 
