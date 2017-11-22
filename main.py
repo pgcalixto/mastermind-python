@@ -1,12 +1,14 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
 """Main logic."""
 from mastermind import Player
 
 
 def main():
-    '''Main function.
+    """Main function.
 
     It is responsible for reading the answers, retrieving the guesses from the
-    Player and writing them.'''
+    Player and writing them."""
 
     # instantiates the player, gets the first guess and play
     game_player = Player()
