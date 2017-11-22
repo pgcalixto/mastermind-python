@@ -50,4 +50,4 @@ def get_possible_guesses(guesses, guess, answer):
     Returns:
         list: A list with all possible guesses.
     """
-    return [code for code in guesses if check_answer(code, guess) != answer]
+    return [code for code in guesses if check_answer(code, guess) == answer]
