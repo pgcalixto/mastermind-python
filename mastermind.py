@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 '''Mastermind game player.'''
 
-from itertools import product as __guess_gen
+from itertools import product as __gen_guess
 
 
 class Player:
@@ -13,9 +13,10 @@ class Player:
     '''
 
     def __init__(self):
-        all_guesses = (''.join(x) for x in __guess_gen('123456', repeat=4))
-        self.__unused_guesses = list(all_guesses)
-        self.__possible_guesses = list(all_guesses)
+        self.__unused_guesses = list(
+            ''.join(x) for x in __gen_guess('123456', repeat=4))
+        self.__possible_guesses = list(
+            ''.join(x) for x in __gen_guess('123456', repeat=4))
         self.__last_guess = '1122'
 
     @staticmethod
