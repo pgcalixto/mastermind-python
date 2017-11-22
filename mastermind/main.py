@@ -74,7 +74,7 @@ def get_best_guess(unused_guesses, possible_guesses):
     """
 
     n_guesses = len(possible_guesses)
-    best_guesses = [possible_guesses[0]]
+    best_guesses = []
     best_score = 0
 
     for guess in unused_guesses:
@@ -89,7 +89,6 @@ def get_best_guess(unused_guesses, possible_guesses):
                 code_matches[answer] += 1
 
         # the guess score is the maximum number of code matches it can have
-        # guess_score = max([x for x in code_matches.values()])
         guess_score = min([n_guesses - x for x in code_matches.values()])
 
         # if the current guess score equals to the best score, includes the
@@ -102,12 +101,9 @@ def get_best_guess(unused_guesses, possible_guesses):
             best_score = guess_score
             best_guesses = [guess]
 
-    # TODO use list comprehensions to match only the first possible item instead
-    # of all the possible items
-    possible_best_guesses = [guess for guess in best_guesses if \
-                             guess in possible_guesses]
-
-    if len(possible_best_guesses) > 0:
-        return possible_best_guesses[0]
-
-    return best_guesses[0]
+    # uses as next guess an element of S, if possible. otherwise, select the
+    # first element of the best guesses list
+    best_guess = next((guess for guess in best_guesses if
+                       guess in possible_guesses),
+                      best_guesses[0])
+    return best_guess
