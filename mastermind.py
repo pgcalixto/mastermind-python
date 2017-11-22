@@ -118,12 +118,8 @@ class Player:
             # might eliminate from S
             guess_score = min([n_guesses - x for x in answer_count.values()])
 
-            # if the current guess score equals to the best score, includes the
-            # current guess to the best guesses list
             if guess_score == best_score:
                 best_guesses.append(guess)
-            # otherwise, if the current guess score is greater than the best
-            # score, updates the best score and the best guesses list
             elif guess_score > best_score:
                 best_score = guess_score
                 best_guesses = [guess]
